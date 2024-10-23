@@ -1,41 +1,55 @@
+/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
+/* Body styling */
 body {
     background-color: #eaeaea;
-    /* background-image: url('your-image-url.jpg'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-}
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);}
 
+
+/* Container flex setup */
 .container {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     min-height: 100vh;
+    opacity: 0;
+    animation: fadeInPage 1s ease-in-out forwards;
 }
 
 @media (min-width: 768px) {
     .container {
         flex-direction: row;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 20px;
     }
 }
 
+/* Editor and preview sections */
 .editor-pane, .preview-section {
     width: 100%;
     flex-grow: 1;
     margin: 10px 10px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.editor-pane:hover, .preview-section:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
 }
 
 @media (min-width: 768px) {
@@ -44,40 +58,92 @@ body {
     }
 }
 
-/* Style for the Live Preview headline (outside the box) */
+/* Preview section styling */
 .preview-section h2 {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: bold;
+    color: #333;
 }
 
+/* Live preview box */
 .preview-pane {
-    background-color: #f0f0f0;
-    padding: 10px;
+    background-color: #fff;
+    padding: 20px;
     border-radius: 10px;
     animation: fadeIn 1s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.preview-pane div{
+.preview-pane div {
     display: block;
     width: 100%;
+    height: 250px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.preview-pane div:hover {
+    background-color: #e6e6e6;
+}
+
+/* Textarea for the editor pane */
+.editor-pane textarea {
+    display: block;
+    width: 99%;
     height: 250px;
     /* padding: 10px; */
     margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
 }
 
-.editor-pane textarea {
-    display: block;
-    width: 100%;
-    height: 250px;
-    padding: 10px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.editor-pane textarea:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
+/* Heading typing animation */
+.editor-pane h2, .preview-section h2 {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    animation: typing 2s steps(20, end), blink-caret 0.5s step-end infinite;
+    font-size: 26px;
+    color: #007bff;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #007bff; }
+}
+
+/* Fade-in animation for the entire page */
+@keyframes fadeInPage {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade-in effect for preview pane */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -89,22 +155,47 @@ body {
     }
 }
 
-/* Heading animation */
-.editor-pane h2, .preview-section h2 {
-    display: inline-block;
-    overflow: hidden;
-    border-right: 2px solid;
-    white-space: nowrap;
-    letter-spacing: 2px;
-    animation: typing 2s steps(20, end), blink-caret 0.5s step-end infinite;
+/* Hover button-like effect on both panes */
+.editor-pane, .preview-pane {
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+.editor-pane:hover, .preview-pane:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
+/* Subtle background gradient and shadow for interactive elements */
+.preview-pane, .editor-pane textarea {
+    background-image: linear-gradient(145deg, #f0f0f0, #eaeaea);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.7);
 }
+
+.main-header h1 {
+    font-size: 36px;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: fadeInPage 2s ease-in-out forwards;
+    background: linear-gradient(145deg, #eaeaea, #dcdcdc);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Fade-in animation for the main headline */
+@keyframes fadeInPage {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

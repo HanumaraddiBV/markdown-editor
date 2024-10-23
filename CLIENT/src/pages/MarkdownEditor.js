@@ -25,7 +25,7 @@ const MarkdownEditor = () => {
   const fetchHTML = async () => {
     if (markdown) {
       try {
-        const response = await axios.post("http://localhost:3000/convert", {
+        const response = await axios.post("http://localhost:5000/convert", {
           markdown,
         });
         setHtmlPreview(response.data.html); // set html preview
@@ -38,18 +38,23 @@ const MarkdownEditor = () => {
   };
 
   return (
-    <div className="container">
-      <div className="editor-pane">
-        <h2>Markdown Editor</h2>
-        <textarea onChange={handleMarkdownChange} value={markdown}></textarea>
+    <>
+      <div className="main-header">
+        <h1>Markdown Editor</h1>
       </div>
-      <div class="preview-section">
-        <h2>Live Preview</h2>
-        <div className="preview-pane">
-          <div dangerouslySetInnerHTML={{ __html: htmlPreview }} />
+      <div className="container">
+        <div className="editor-pane">
+          <h2>Editor</h2>
+          <textarea onChange={handleMarkdownChange} value={markdown}></textarea>
+        </div>
+        <div class="preview-section">
+          <h2>Live Preview</h2>
+          <div className="preview-pane">
+            <div dangerouslySetInnerHTML={{ __html: htmlPreview }} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
